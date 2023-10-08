@@ -40,7 +40,7 @@ namespace hw1_ex1
                 case "Line":
                     // Draw a line
                     Pen pen = new Pen(Color.Black, 2); // Customize color and thickness
-                    g.DrawLine(pen, 10, 10, 200, 200); // Draw a line from (10, 10) to (100, 100)
+                    g.DrawLine(pen, 10, 10, 200, 200); // Draw a line from (10, 10) to (200, 200)
                     pen.Dispose();
                     break;
 
@@ -54,14 +54,14 @@ namespace hw1_ex1
                 case "Circle":
                     // Draw a circle
                     Pen circlePen = new Pen(Color.Blue, 2); // Customize color and thickness
-                    g.DrawEllipse(circlePen, 50, 50, 200, 200); // Draw a circle at (150, 50) with a width and height of 100
+                    g.DrawEllipse(circlePen, 50, 50, 200, 200); // Draw a circle at (50, 50) with a width and height of 200
                     circlePen.Dispose();
                     break;
 
                 case "Rectangle":
                     // Draw a rectangle
                     Pen rectPen = new Pen(Color.Green, 2); // Customize color and thickness
-                    g.DrawRectangle(rectPen, 50, 50, 200, 120); // Draw a rectangle at (250, 50) with a width of 100 and a height of 80
+                    g.DrawRectangle(rectPen, 50, 50, 200, 120); // Draw a rectangle at (50, 50) with a width of 200 and a height of 120
                     rectPen.Dispose();
                     break;
             }
