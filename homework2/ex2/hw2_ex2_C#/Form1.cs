@@ -16,5 +16,12 @@ namespace hw2_ex2_C_
         {
             InitializeComponent();
         }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            // ARRAY    
+
+
+        }
     }
 }
