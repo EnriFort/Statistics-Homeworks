@@ -36,6 +36,9 @@ let newArray2 = myArray.filter(name => name !== "Nice Guy");
 newArray2.includes("Nice Guy");
 
 
+
+
+
 /* LIST (equivalent to JavaScript array) */
 
 // Create an array of integers (JavaScript array)
@@ -56,6 +59,9 @@ myList.includes(3);
 let index = 1; // Index of element to get
 let element = myList[index];
 console.log(`Element at index ${index}: ${element}`);
+
+
+
 
 
 /* DICTIONARY (equivalent to JavaScript object) */
