@@ -3,11 +3,32 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 
+
+/*==== This file contains some useful functions used in the form ====*/
+
 public static class Utility
 {
     private static Random random = new Random();
 
-    // generate a random color
+    // The 2 functions to calculate from the real coordinates the device one
+    public static int FromXRealToXVirtual(double X, double minX, double maxX, int Left, int W)
+    {
+        return (int)(Left + W * (X - minX) / (maxX - minX));
+    }
+    public static int FromYRealToYVirtual(double Y, double minY, double maxY, int Top, int H, string freqType)
+    {
+        if (freqType == "null")
+        {
+            // Adjust the offset for "null" case
+            return (int)(Top + H / 2 - H / 2 * (Y - minY) / (maxY - minY));
+        }
+        else
+        {
+            return (int)(Top + H - H * (Y - minY) / (maxY - minY));
+        }
+    }
+
+    // To generate a random color
     public static Color GetRandomColor()
     {
         HashSet<Color> usedColors = new HashSet<Color>();
@@ -39,15 +60,27 @@ public static class Utility
         }
     }
 
-    // Return the system coordinates from real coordinate X, Y
-    public static Tuple<float, float> SystemCoordinates(int X, int Y, int maxX, int maxY, int width, int height)
+    // count how many values (contained in vect) fall in each intervall
+    public static double[] CountValuesInIntervals(List<int> vect, double maxVal, int numBins)
     {
-        float scaledX = X * (width / maxX);
-        float scaledY = height/2 - (Y * (height / maxY)); 
-        scaledX = Math.Max(0, Math.Min(scaledX, width));
-        scaledY = Math.Max(0, Math.Min(scaledY, height));
+        // Initialize an array to represent bins with counts initialized to zero
+        double[] binCounts = new double[numBins];
 
-        return Tuple.Create(scaledX, scaledY);
+        // Calculate the interval length
+        double intervalLength = (double)maxVal/numBins;
+
+        // Iterate through each element in the array
+        foreach (int value in vect)
+        {
+            // Calculate the bin index for the value
+            int binIndex = (int)(value / intervalLength);
+
+            // Ensure the binIndex is within the valid range
+            if (binIndex >= 0 && binIndex < numBins)
+            {
+                binCounts[binIndex]++;
+            }
+        }
+        return binCounts;
     }
-
 }
