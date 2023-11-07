@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace hw2_ex1_C_.Properties
+namespace CalculateDistributions.Properties
 {
 
 

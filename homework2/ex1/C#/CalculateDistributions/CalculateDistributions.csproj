@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{335FBFD3-7CD3-464F-B570-C6B5887F0318}</ProjectGuid>
+    <ProjectGuid>{8C66613D-030C-49FB-BC6D-92E5402E1168}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>AttacksSimulation</RootNamespace>
-    <AssemblyName>AttacksSimulation</AssemblyName>
+    <RootNamespace>CalculateDistributions</RootNamespace>
+    <AssemblyName>CalculateDistributions</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -52,11 +52,8 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="histogram.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ResizableRectangle.cs" />
-    <Compile Include="Utility.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>

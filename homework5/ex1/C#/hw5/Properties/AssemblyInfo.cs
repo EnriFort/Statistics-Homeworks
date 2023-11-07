@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // Le informazioni generali relative a un assembly sono controllate dal seguente 
 // set di attributi. Modificare i valori di questi attributi per modificare le informazioni
 // associate a un assembly.
-[assembly: AssemblyTitle("hw2_ex1_C#")]
+[assembly: AssemblyTitle("hw5")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("hw2_ex1_C#")]
+[assembly: AssemblyProduct("hw5")]
 [assembly: AssemblyCopyright("Copyright ©  2023")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // Se il progetto viene esposto a COM, il GUID seguente verrà utilizzato come ID della libreria dei tipi
-[assembly: Guid("6aca38bd-e82e-47b4-b195-6f48ef20a059")]
+[assembly: Guid("842af270-b018-49ad-8340-f20800d6d019")]
 
 // Le informazioni sulla versione di un assembly sono costituite dai seguenti quattro valori:
 //

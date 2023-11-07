@@ -6,7 +6,7 @@ using System.Windows.Forms;
 
 /*==== This file contains some useful functions used in the form ====*/
 
-public static class Utility
+public static class utils
 {
     private static Random random = new Random();
 
@@ -82,5 +82,21 @@ public static class Utility
             }
         }
         return binCounts;
+    }
+
+    public static double GenerateCumulatedFrequency(double y, double n_atks, int x, string type) // type could be = aabsolute, relative, normalized
+    {
+        if (type == "rel")
+        {
+            return y * n_atks / (x + 1);
+        }
+        else if (type == "norm")
+        {
+            return y / Math.Sqrt(x + 1);
+        }
+        else // Absolute frequency or the first case
+        {
+            return y;
+        }
     }
 }

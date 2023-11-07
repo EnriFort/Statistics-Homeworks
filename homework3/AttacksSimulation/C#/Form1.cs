@@ -18,7 +18,7 @@ namespace AttacksSimulation
         // Draw the chart and return the # of attack suffered by process i at time N
         private int DrawChart(Graphics g, double n_atk, Rectangle rect, string freqType, double prob)
         {
-            Color lineColor = Utility.GetRandomColor(); // Get a random color 
+            Color lineColor = utils.GetRandomColor(); // Get a random color 
             Pen pen = new Pen(lineColor, 1);
             pen.DashStyle = System.Drawing.Drawing2D.DashStyle.Solid;
 
@@ -32,25 +32,25 @@ namespace AttacksSimulation
 
             for (int x = 0; x < n_atk; x++)
             {
-                y += Utility.GenerateWithProbability(prob, lowB, uppB);
+                y += utils.GenerateWithProbability(prob, lowB, uppB);
 
                 if (x == 0)
                 {
                     pointsList.Clear();
                 }
 
-                f = GenerateCumulatedFrequency(y, n_atk, x, freqType); // Calculate the corrispective frequency                
+                f = utils.GenerateCumulatedFrequency(y, n_atk, x, freqType); // Calculate the corrispective frequency                
                 
                 if (freqType == "norm")
                 {
-                    yDevice = Utility.FromYRealToYVirtual(f, 0, n_atk / Math.Sqrt(n_atk), rect.Top, rect.Height, freqType);
+                    yDevice = utils.FromYRealToYVirtual(f, 0, n_atk / Math.Sqrt(n_atk), rect.Top, rect.Height, freqType);
                 }
                 else
                 {
-                    yDevice = Utility.FromYRealToYVirtual(f, 0, n_atk, rect.Top, rect.Height, freqType);
+                    yDevice = utils.FromYRealToYVirtual(f, 0, n_atk, rect.Top, rect.Height, freqType);
                 }
 
-                xDevice = Utility.FromXRealToXVirtual(x, 0, n_atk, rect.Left, rect.Width);
+                xDevice = utils.FromXRealToXVirtual(x, 0, n_atk, rect.Left, rect.Width);
                 pointsList.Add(new Point(xDevice, yDevice));
 
                 if (x == n_atk - 1)
@@ -104,7 +104,7 @@ namespace AttacksSimulation
                     penetrations.Add(DrawChart(g, n_atk, rect, frequencyType, probability));
                 }
                 double maxValue = penetrations.Max();
-                double[] bar_frequency = Utility.CountValuesInIntervals(penetrations, maxValue, bins);
+                double[] bar_frequency = utils.CountValuesInIntervals(penetrations, maxValue, bins);
 
                 // Create a Histogram object with the bin counts
                 histogram = new Histogram(bar_frequency);
@@ -114,20 +114,6 @@ namespace AttacksSimulation
             pictureBox1.Image = bmp;
         }
 
-        private double GenerateCumulatedFrequency(double y, double n_atks, int x, string type) // type could be = aabsolute, relative, normalized
-        {
-            if (type == "rel")
-            {
-                return y*n_atks / (x + 1);
-            }
-            else if (type == "norm")
-            {
-                return y / Math.Sqrt(x + 1);
-            }
-            else // Absolute frequency or the first case
-            {
-                return y;
-            }
-        }
+        
     }
 }
