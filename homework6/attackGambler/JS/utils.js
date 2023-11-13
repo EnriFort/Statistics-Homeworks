@@ -1,10 +1,10 @@
 class utils {
 
-    static BernoulliDist(p) {
+    static BernoulliDist(p){
         return (Math.random() <= p) ? 1 : 0;
     }
 
-    static RademacherDist(p) { // 1 penetrated, -1 protected
+    static RademacherDist(p){ // 1 penetrated, -1 protected
         return (Math.random() <= p) ? 1 : -1;
     }
 
@@ -53,7 +53,7 @@ class utils {
         return this.CSS_COLORS[Math.round(Math.random() * this.CSS_COLORS.length)];
     }
 
-    static drawHistograms(rct, frequencies, devRect, strokeStyle, lineWidth, fillStyle) {
+    static drawHistogramsFromDict(rct, frequencies, devRect, strokeStyle, lineWidth, fillStyle) {
 
         // Initialize maxFrequency to a very small value
         let maxFrequency = -Infinity;
@@ -76,11 +76,6 @@ class utils {
             
             rct.rect(rectHisto.x, rectHisto.y, rectHisto.width, rectHisto.height);
 
-            // For Stroke
-          /*rct.lineWidth = lineWidth;
-            rct.strokeStyle = strokeStyle;
-            rct.strokeRect(rectHisto.x, rectHisto.y, rectHisto.width, rectHisto.height) */
-
             // For fill
             rct.fillStyle = fillStyle;
             rct.fillRect(rectHisto.x, rectHisto.y, rectHisto.width, rectHisto.height)
@@ -88,17 +83,44 @@ class utils {
         }
 
     }
-    
-    
-    static createGradient(ctx, rectInterval){
-        const gradient = ctx.createLinearGradient(rectInterval.x, rectInterval.y, rectInterval.x, rectInterval.y + rectInterval.height);
-        gradient.addColorStop(0, 'black');
-        gradient.addColorStop(0.25, fillStyle);
-        gradient.addColorStop(0.5, 'white');
-        gradient.addColorStop(0.75, fillStyle);
-        gradient.addColorStop(1, 'black');
+
+    static drawHistogramsFromArr(rct, frequencies, devRect, startGrdColor, endGrdColor) {
+
+        let bins = frequencies.length; 
+        let maxFrequency = 0;
+        let gap = 1;
+        let barHeightFactor = 0.4; // Adjust this factor to control bar height
+
+        // get the maximum value
+        for (let i = 0; i < bins; i++) {
+            maxFrequency = Math.max(maxFrequency, frequencies[i]);
+        }
         
-        return gradient;
+        for (let i=0; i < bins; i++){
+
+
+            // width and height are reversed because the histogram is horizontal
+            let barWidth = frequencies[i] / maxFrequency * (devRect.width) - 1;
+            let barHeight = (devRect.height - (bins - 1) * gap) / bins * barHeightFactor;
+
+            let x = devRect.x + 2;
+            let y = devRect.top() + (devRect.height/5) + (i + 1) * (barHeight + gap);
+
+            let rectHisto = new Rectangle(x, y, barWidth, barHeight);
+            
+            rct.rect(rectHisto.x, rectHisto.y, rectHisto.width, rectHisto.height);
+
+            // Create gradient
+            const grd = rct.createLinearGradient(rectHisto.x, 0, rectHisto.x + rectHisto.width, 0);
+            grd.addColorStop(0, startGrdColor);
+            grd.addColorStop(1, endGrdColor);
+
+            // Fill with gradient
+            rct.fillStyle = grd;
+            rct.fillRect(rectHisto.x, rectHisto.y, rectHisto.width, rectHisto.height)
+
+        }
+
     }
     
     static  CSS_COLORS = [
