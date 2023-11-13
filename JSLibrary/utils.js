@@ -54,23 +54,23 @@ class utils {
     }
 
     static drawHistogramsFromDict(rct, frequencies, devRect, startGrdColor, endGrdColor) {
-
+        
+        let bins = Object.keys(frequencies).length;
         // Initialize maxFrequency to a very small value
         let maxFrequency = -Infinity;
+        
         // Iterate through the values of histoFrequencies
         for (const frequency of Object.values(frequencies)) {
             if (frequency > maxFrequency) {
                 maxFrequency = frequency;
             }
         }
-
-        let nIntervals = Object.keys(frequencies).length;
-        
+ 
         for (const yValue in frequencies){
 
             // width and height are reversed because the histogram is horizontal
             let barWidth = frequencies[yValue] / maxFrequency * (devRect.width) - 2;
-            let barHeight = (devRect.height - nIntervals - 1) / nIntervals * 0.2;
+            let barHeight = (devRect.height - bins - 1) / bins * 0.2;
 
             let rectHisto = new Rectangle(devRect.x + 1, yValue, barWidth, barHeight);
             
@@ -123,6 +123,12 @@ class utils {
             // Fill with gradient
             rct.fillStyle = grd;
             rct.fillRect(rectHisto.x, rectHisto.y, rectHisto.width, rectHisto.height)
+            
+            // Add legend
+            rct.font = "9px Verdana";
+            rct.fillStyle = "white";
+            rct.fillText(frequencies[i].toString(), rectHisto.x, rectHisto.y + (rectHisto.height/2));
+            
 
         }
 

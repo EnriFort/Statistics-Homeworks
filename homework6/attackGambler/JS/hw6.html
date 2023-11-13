@@ -6,37 +6,8 @@
     <meta charset="utf-8">
     <script src="../../../JSLibrary/Rectangle.js"></script>
     <script src="../../../JSLibrary/utils.js"></script>
-
+    <link rel="stylesheet" type="text/css" href="../../../styles.css">
     <title>Attack Simulation</title>
-    
-    <style>
-
-        h3 {
-            font-family:Arial, Helvetica, sans-serif;
-            color: green;
-        }
-
-        body {
-            font-family:Arial, Helvetica, sans-serif;
-            background-color:#FFFAED;
-        }
-
-        label {
-            font-weight: bold;
-            color:navy;
-        }
-
-        input[type="number"] {
-            margin-right: 20px;
-        }
-
-        canvas {
-            background-color: #17181B;
-            border: 2px solid green;
-            vertical-align: top;
-        }
-    </style>
-
 </head>
 
 <body>
@@ -84,7 +55,7 @@
         //main();
 
         // It gets the values passed from the user
-        function getUserValues() {
+        function calcGraphicsValues() {
 
             nAttacks = Math.round(Number(inputAttacks.value));
             nSystems = Number(inputSystems.value);
@@ -107,7 +78,7 @@
 
         function main() {
 
-            getUserValues();
+            calcGraphicsValues();
 
             // clear stuff
             rct.clearRect(0, 0, myChart.width, myChart.height);
@@ -125,12 +96,12 @@
 
             //console.log(histoFrequencies); // Add this line to inspect histoFrequencies
             rectChart.drawRectangle(rct, "white", 2, []);
-            const HistogramRectangle = new Rectangle(utils.XtoDevice(nAttacks, 0, nAttacks, rectChart.x, rectChart.width), rectChart.y, 150, rectChart.height) // instantiate new rectangle for the histograms
-            HistogramRectangle.drawRectangle(rct, "rgba(250,100,150,0.5)", 2, [1, 1]); // draw this rectangle
-
-            utils.drawHistogramsFromArr(rct, penetrations, HistogramRectangle, "lightgreen", "red");
-
+            const HistogramRectangle = new Rectangle(utils.XtoDevice(nAttacks, 0, nAttacks, rectChart.x, rectChart.width), rectChart.y, 160, rectChart.height) // instantiate new rectangle for the histograms
+            HistogramRectangle.drawRectangle(rct, "rgba(0,100,160,0.5)", 2, [1, 1]); // draw this rectangle
+            utils.drawHistogramsFromArr(rct, penetrations, HistogramRectangle, "red", "lightgreen");
         }
+
+
 
         // The function which draw the lines. The way in which i draw is the same for all the cases (changes the getUserValues instead)
         function drawLine(frequencies) {
