@@ -53,7 +53,7 @@ class utils {
         return this.CSS_COLORS[Math.round(Math.random() * this.CSS_COLORS.length)];
     }
 
-    static drawHistogramsFromDict(rct, frequencies, devRect, strokeStyle, lineWidth, fillStyle) {
+    static drawHistogramsFromDict(rct, frequencies, devRect, startGrdColor, endGrdColor) {
 
         // Initialize maxFrequency to a very small value
         let maxFrequency = -Infinity;
@@ -76,8 +76,13 @@ class utils {
             
             rct.rect(rectHisto.x, rectHisto.y, rectHisto.width, rectHisto.height);
 
-            // For fill
-            rct.fillStyle = fillStyle;
+            // Create gradient
+            const grd = rct.createLinearGradient(rectHisto.x, 0, rectHisto.x + rectHisto.width, 0);
+            grd.addColorStop(0, startGrdColor);
+            grd.addColorStop(1, endGrdColor);
+
+            // Fill with gradient
+            rct.fillStyle = grd;
             rct.fillRect(rectHisto.x, rectHisto.y, rectHisto.width, rectHisto.height)
 
         }
@@ -104,7 +109,7 @@ class utils {
             let barHeight = (devRect.height - (bins - 1) * gap) / bins * barHeightFactor;
 
             let x = devRect.x + 2;
-            let y = devRect.top() + (devRect.height/5) + (i + 1) * (barHeight + gap);
+            let y = devRect.top() + (devRect.height/4) + (i + 1) * (barHeight + gap);
 
             let rectHisto = new Rectangle(x, y, barWidth, barHeight);
             
